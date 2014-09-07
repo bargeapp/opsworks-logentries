@@ -9,11 +9,3 @@ execute "yum update"
 execute "yum install logentries -y"
 execute "le register --user-key #{node[:logentries][:userkey]} --name='#{node[:logentries][:hostname]}'"
 execute "yum install logentries-daemon -y"
-
-logs = node[:logentries][:files]
-logs.each do |log|
-  execute "le follow '#{log}'"
-end
-
-# Start the service
-execute "service logentries restart"
