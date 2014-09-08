@@ -18,9 +18,10 @@ In stack settings set custom json like so:
 ```
 
 ## Usage
-This cookbook's broken into two recipes:
+This cookbook's broken into 3 recipes:
 
 1. `logentries::default` installs the logentries agent using the `userkey` and `hostname` specified in the custom json
 2. `logentries::follow` follows the files specified in the custom json `files` array
+3. `logentries::unfollow` unfollows the files specified in the custom js `files` array
 
-Under your Layer settings you'll want to add `logentries::default` to the *Setup* or *Configure* lifecycle event and `logentries::follow` to the *Deploy* event.
+Under your Layer settings you'll want to add `logentries::default` to the *Setup* lifecycle event, `logentries::follow` to the *Deploy* event, and `logentries::unfollow` to the *Undeploy* event.
