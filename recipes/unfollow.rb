@@ -1,6 +1,8 @@
-logs = node[:logentries][:files]
-logs.each do |log|
-  execute "le rm '#{log}'"
+node[:deploy].each do |application, deploy|
+  logs = node[:logentries][application][:files]
+  logs.each do |log|
+    execute "le rm '#{log}'"
+  end
 end
 
 # Start the service
