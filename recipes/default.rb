@@ -7,5 +7,5 @@ end
 
 execute "yum update"
 execute "yum install logentries -y"
-execute "le register --user-key #{node[:logentries][:userkey]} --name='#{node[:logentries][:hostname]}'"
+execute "le register --user-key #{node[:logentries][:userkey]} --name='#{node[:logentries][:hostname]} - #{`hostname`.chomp}'"
 execute "yum install logentries-daemon -y"
