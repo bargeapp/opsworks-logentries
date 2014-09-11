@@ -1,0 +1,27 @@
+# load file watcher module
+$Modload imfile
+
+<% @files.each do |file| -%>
+
+$InputFileName <%= file[:path] %>
+$InputFileTag <%= file[:tag] %>
+$InputFileStateFile <%= file[:state_file] || "#{file[:tag]}-state" %>
+$InputFileSeverity <%= file[:severity] || 'info' %>
+$InputFileFacility <%= file[:facility] || 'local6' %>
+$InputRunFileMonitor
+
+<% end -%>
+
+# set file poll seconds
+$InputFilePollInterval <%= @poll_seconds %>
+
+# enable ssl
+$DefaultNetstreamDriverCAFile /etc/ssl/certs/logentries.all.crt
+$ActionSendStreamDriver gtls
+$ActionSendStreamDriverMode 1
+$ActionSendStreamDriverAuthMode x509/name
+$ActionSendStreamDriverPermittedPeer *.logentries.com
+
+# log everything to logentries
+$template LogentriesFormat,"<%= @token %> %HOSTNAME% %syslogtag%%msg%\n"
+<%= @facility || 'local6' %>.* @@api.logentries.com:20000;LogentriesFormat
