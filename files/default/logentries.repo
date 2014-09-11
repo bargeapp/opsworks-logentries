@@ -1,6 +1,0 @@
-[logentries]
-name=Logentries repo
-enabled=1
-metadata_expire=1d
-baseurl=http://rep.logentries.com/amazonlatest/\$basearch
-gpgkey=http://rep.logentries.com/RPM-GPG-KEY-logentries
